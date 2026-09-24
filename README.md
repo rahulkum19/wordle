@@ -7,21 +7,21 @@
 
 ## Overview
 
-Wordle (JavaFX) is a desktop clone of the popular word-guessing game, built with Java and JavaFX. The application strictly follows the Model-View-Controller (MVC) and Observer architectural patterns, cleanly decoupling dictionary communication and game logic from JavaFX rendering and user interaction.
+**Wordle (JavaFX)** is a desktop clone of the popular word-guessing game built with Java and JavaFX. The application follows the **Model-View-Controller (MVC)** and **Observer** architectural patterns, keeping game rules, dictionary network calls, and UI rendering cleanly separated.
 
-The game features dynamic word selection and real-time guess verification powered by the Datamuse API, customizable difficulty tiers, an intelligent hint assist system, on-screen and physical keyboard support, and smooth UI animations.
+The game features dynamic word selection and real-time guess verification powered by the Datamuse API, three customizable difficulty tiers, an intelligent hint system, on-screen and physical keyboard support, and responsive UI animations.
 
 ---
 
 ## Key Features
 
-- **Dynamic Word Generation**: Fetches target words directly from the [Datamuse API](https://www.datamuse.com/api/) filtered by English word frequency metrics.
-- **Live Dictionary Validation**: Verifies player guesses asynchronously against the Datamuse API before evaluation to ensure legitimate English words.
-- **3 Difficulty Tiers**: Distinct game modes adjusting attempt counts, word obscurity, keyboard assistance, and hint availability.
-- **Smart Hint System**: Dynamically offers an unsolved letter in its correct spot when a player is struggling on Easy or Medium modes.
-- **Dual Input Support**: Full support for both standard physical keyboard typing and an on-screen color-coded virtual keyboard.
-- **Shake Animation & Visual Feedback**: Dynamic shake animations trigger on invalid entries, and animated modal overlays announce game outcomes.
-- **Decoupled Event Architecture**: The JavaFX view re-renders purely in reaction to observer notifications emitted by the model.
+- **Dynamic Word Generation**: Fetches target words directly from the [Datamuse API](https://www.datamuse.com/api/) filtered by English word frequency scores.
+- **Live Dictionary Validation**: Verifies player guesses asynchronously against the Datamuse API before evaluating them to ensure valid English words.
+- **3 Difficulty Tiers**: Adjusts allowed attempts, word rarity, on-screen keyboard support, and hint access across Easy, Medium, and Hard modes.
+- **Smart Hint System**: Reveals an unsolved letter in its correct position upon request when playing on Easy or Medium modes.
+- **Dual Input Support**: Full support for both standard physical keyboard typing and an on-screen, color-coded virtual keyboard.
+- **Visual Feedback & Animations**: Shake animations trigger on invalid guesses, and modal overlays display game outcomes.
+- **Observer-Driven UI Updates**: Uses the Observer pattern so JavaFX views update automatically in response to state changes in the model, keeping game logic independent of the UI.
 
 ---
 
