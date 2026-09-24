@@ -30,21 +30,21 @@ The game features dynamic word selection and real-time guess verification powere
 ### Model-View-Controller (MVC)
 
 - **Model (`com.wordle.model`)**:
-  - `Model` & `ModelImpl`: Manages game state (status, guesses, grayed letters, active mode, hint logic, and attempts).
+  - `Model` & `ModelImpl`: Manages core game state, including active guesses, excluded (grayed) letters, current difficulty mode, hint logic, and remaining attempts.
 - **Controller (`com.wordle.controller`)**:
-  - `Controller` & `ControllerImpl`: Handles player actions (keystrokes, mode changes, hint requests), manages async network requests via OkHttp, and updates the model.
+  - `Controller` & `ControllerImpl`: Handles user input (physical keystrokes, on-screen clicks, mode changes, and hints), coordinates asynchronous network requests using OkHttp, and updates the model.
 - **View (`com.wordle.view`)**:
-  - `AppLauncher`: JavaFX application entry point and stage setup.
-  - `View`: Renders the UI (header, board grid, virtual keyboard, end-game modal, animations).
-  - `FXComponent`: Functional interface defining UI components.
+  - `AppLauncher`: JavaFX entry point that configures the application window and stage.
+  - `View`: Renders the visual interface, including the header, letter grid, on-screen keyboard, end-game modal, and tile animations.
+  - `FXComponent`: Functional interface defining renderable JavaFX UI components.
 
 ### Observer Pattern
 
-The model implements the `Subject` interface, allowing any view implementing `Observer` to register via `addObserver(Observer o)`. State mutations trigger `notifyObservers()`, enabling seamless, decoupled UI updates cleanly dispatched on the JavaFX Application Thread (`Platform.runLater`).
+The model implements the `Subject` interface, allowing any view implementing `Observer` to register via `addObserver(Observer o)`. When the game state changes, the model calls `notifyObservers()`, safely dispatching UI updates to the JavaFX Application Thread using `Platform.runLater`.
 
 ### Asynchronous Networking
 
-HTTP requests to the Datamuse API run off the UI thread using OkHttp's asynchronous `enqueue()` mechanism to keep the user interface smooth and responsive during word validation and fetching.
+Network calls to the Datamuse API run on background threads using OkHttp's asynchronous `enqueue()` mechanism. This ensures the JavaFX UI thread is never blocked during dictionary validation or word fetching, keeping animations and typing completely smooth.
 
 ---
 
