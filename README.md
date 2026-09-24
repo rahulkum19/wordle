@@ -51,26 +51,27 @@ Network calls to the Datamuse API run on background threads using OkHttp's async
 ## Project Structure
 
 ```text
-src/
-|-- main/
-|   |-- java/com/wordle/
-|   |   |-- Main.java                    # Application entry point
-|   |   |-- controller/
-|   |   |   |-- Controller.java          # Controller interface
-|   |   |   `-- ControllerImpl.java      # Input handling & async networking
-|   |   |-- model/
-|   |   |   |-- Model.java               # Core model contract
-|   |   |   |-- ModelImpl.java           # Game rules & dictionary state
-|   |   |   |-- Observer.java            # Observer interface
-|   |   |   `-- Subject.java             # Subject interface
-|   |   `-- view/
-|   |       |-- AppLauncher.java         # JavaFX application bootstrapper
-|   |       |-- FXComponent.java         # View component interface
-|   |       `-- View.java                # Master view & UI rendering
-|   `-- resources/
-|       `-- style/
-|           `-- wordle.css               # Styling for tiles, keyboard, and modals
-pom.xml                                  # Maven configuration & dependencies
+wordle/
+|-- pom.xml                                  # Maven dependencies & build configuration
+`-- src/
+    `-- main/
+        |-- java/com/wordle/
+        |   |-- Main.java                    # Application entry point
+        |   |-- controller/
+        |   |   |-- Controller.java          # Controller interface
+        |   |   `-- ControllerImpl.java      # Input handling & async networking
+        |   |-- model/
+        |   |   |-- Model.java               # Core model interface
+        |   |   |-- ModelImpl.java           # Game rules & state management
+        |   |   |-- Observer.java            # Observer interface
+        |   |   `-- Subject.java             # Subject interface for event dispatch
+        |   `-- view/
+        |       |-- AppLauncher.java         # JavaFX application setup & window initialization
+        |       |-- FXComponent.java         # Functional UI component interface
+        |       `-- View.java                # Master view & UI rendering
+        `-- resources/
+            `-- style/
+                `-- wordle.css               # Styling for tiles, keyboard, and modals
 ```
 
 ---
@@ -80,28 +81,23 @@ pom.xml                                  # Maven configuration & dependencies
 ### Prerequisites
 
 - **Java Development Kit (JDK)**: Version 21 or higher (JDK 23 recommended).
-- **Apache Maven**: Version 3.8+ installed and available on PATH.
-- **Internet Connection**: Required for Datamuse API word retrieval and guess verification.
+- **Apache Maven**: Version 3.8+ installed and available on `PATH`.
+- **Internet Connection**: Required for Datamuse API word retrieval and guess validation.
 
-### Build and Execution
+### Running the Game
 
-Compile and launch the game directly via the JavaFX Maven plugin:
+#### Option 1: Via Terminal (Maven)
+Compile and launch the game directly from the project root:
 
 ```bash
 mvn clean javafx:run
 ```
 
-### Packaging Executable JAR
-
-Build a standalone executable JAR bundling all required dependencies:
-
-```bash
-mvn clean package
-```
-
-```bash
-java -jar target/wordle-1.0-SNAPSHOT.jar
-```
+#### Option 2: Via IntelliJ IDEA
+1. Open the project in IntelliJ IDEA.
+2. Open the **Maven** tool window on the right sidebar.
+3. Expand **Plugins** -> **javafx**.
+4. Double-click **javafx:run**.
 
 ---
 
@@ -111,9 +107,9 @@ java -jar target/wordle-1.0-SNAPSHOT.jar
 
 The objective is to guess a hidden 5-letter word within a limited number of attempts:
 - Each guess must be a valid 5-letter word recognized by the dictionary.
-- After submitting a guess, tiles change color to give feedback:
-  - 🟩 **Green**: The letter is correct and in the correct position.
-  - 🟨 **Yellow**: The letter is in the word, but in a different position.
+- After submitting a guess, the tiles change color to provide feedback:
+  - 🟩 **Green**: The letter is correct and placed in the correct position.
+  - 🟨 **Yellow**: The letter exists in the word, but is in a different position.
   - ⬜ **Gray**: The letter is not in the target word.
 
 ### Controls
@@ -129,4 +125,4 @@ The objective is to guess a hidden 5-letter word within a limited number of atte
 
 - **Easy Mode**: 7 attempts, high-frequency/familiar words (top 20% frequency), on-screen keyboard enabled, hint system available.
 - **Medium Mode**: 6 attempts, moderately frequent words (15%–35% frequency), on-screen keyboard enabled, hint system available.
-- **Hard Mode**: 5 attempts, rare/challenging words (bottom 20% frequency), on-screen keyboard disabled (physical typing only), hints disabled, and strict hard-mode rules (cannot reuse gray letters).
+- **Hard Mode**: 5 attempts, rare/challenging words (bottom 20% frequency), on-screen keyboard disabled (physical typing only), hints disabled, and strict rules (cannot reuse gray letters).
