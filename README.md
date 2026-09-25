@@ -7,6 +7,7 @@
 <p align="center">
   <img src="assets/wordle_demo.gif" alt="Wordle JavaFX Demo" width="420"/>
 </p>
+
 ---
 
 ## Overview
