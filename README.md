@@ -4,6 +4,11 @@
 **Tech Stack:** Java 23 | JavaFX 21 | Apache Maven | MVC Architecture | OkHttp | Datamuse API
 
 ---
+<p align="center">
+  <img src="assets/wordle_demo.gif" alt="Wordle JavaFX Demo" width="420"/>
+</p>
+---
+
 ## Overview
 
 **Wordle (JavaFX)** is a desktop clone of the popular word-guessing game built with Java and JavaFX. The application follows the **Model-View-Controller (MVC)** and **Observer** architectural patterns, keeping game rules, dictionary network calls, and UI rendering cleanly separated.
